@@ -23,6 +23,15 @@ def get_extra_data(request, response, body):
 
 
 class ActivityLogMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        self.process_request(request)
+        response = self.get_response(request)
+        self.process_response(request, response)
+        return response
+    
     def process_request(self, request):
         request.saved_body = request.body
         if conf.LAST_ACTIVITY and request.user.is_authenticated():
