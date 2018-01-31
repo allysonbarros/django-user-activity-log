@@ -19,10 +19,10 @@ INSTALLED_APPS = (
     'activity_log',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     ...
     'activity_log.middleware.ActivityLogMiddleware',
-)
+]
 
 # For writing log to another DB
 
